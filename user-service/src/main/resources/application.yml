@@ -1,0 +1,49 @@
+server:
+  port: 0 # msa random port
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: user-service
+  profiles:
+    active: local
+  application:
+    name: user-service
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+eureka:
+  instance:
+    instance-id: user-service
+#    hostname: user-service
+    hostname: 192.168.0.45
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+greeting:
+  message: Welcome to the Simple E-commerce.
+logging:
+  level:
+    com.example.userservice: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, busrefresh, info, metrics, prometheus
+
+jwt:
+  issuer: rhw
+  subject: auth
+  expires-time: 3600
+  secret: my-secret

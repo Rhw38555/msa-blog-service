@@ -1,0 +1,91 @@
+server:
+  port: 8000
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: apigateway-service
+spring:
+  application:
+    name: apigateway-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+  profiles:
+    active: local
+  cloud:
+    client:
+      hostname: apigateway-service
+    config:
+      uri: http://127.0.0.1:8888
+      name: gateway-service
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#      default-filters:
+#        - name: GlobalFilter
+#          args:
+#            baseMessage: Spring CLoud Gateway GlobalFilter
+#            preLogger: true
+#            postLogger: true
+      routes:
+        - id: blog-service
+          uri: lb://BLOG-SERVICE
+          predicates:
+            - Path=/blog-service/api/v1/posts/**
+          filters:
+            - RewritePath=/blog-service/api/v1/(?<segment>.+), /api/v1/$\{segment} # depth 살려 전달
+            - AuthorizationHeaderFilter
+        - id: blog-service
+          uri: lb://BLOG-SERVICE
+          predicates:
+            - Path=/blog-service/api/v1/comments/**
+          filters:
+            - RewritePath=/blog-service/api/v1/(?<segment>.+), /api/v1/$\{segment} # depth 살려 전달
+            - AuthorizationHeaderFilter
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/api/v1/users/**
+          filters:
+            - RewritePath=/user-service/api/v1/(?<segment>.+), /api/v1/$\{segment} # depth 살려 전달
+            - AuthorizationHeaderFilter
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/api/v1/users/signup
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie #
+            - RewritePath=/user-service/api/v1/(?<segment>.+), /api/v1/$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/api/v1/users/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie #
+            - RewritePath=/user-service/api/v1/(?<segment>.+), /api/v1/$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/api/v1/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie #
+            - RewritePath=/user-service/api/v1/(?<segment>.+), /api/v1/$\{segment} #
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace, busrefresh, info, metrics, prometheus
+
+jwt:
+  issuer: rhw
+  subject: auth
+  expires-time: 3600

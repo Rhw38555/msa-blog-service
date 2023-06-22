@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  zookeeper:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+    environment:
+      TZ: Asia/Seoul
+    networks:
+      - ecommerce-network
+    restart: always
+networks:
+  ecommerce-network:
+    external:
+      name: ecommerce-network
