@@ -1,0 +1,23 @@
+server:
+  port: 8888
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+  application:
+    name: config-service
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888
+      name: config-service
+      server:
+        git:
+          uri: https://github.com/Rhw38555/msa-spring-config-files
+          default-label: main
+  profiles:
+    active: local
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh, prometheus
