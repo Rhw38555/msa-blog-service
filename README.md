@@ -7,6 +7,9 @@ msa 환경 기반 블로그 시스템 구축
 * 댓글 관리 기능 : 댓글 작성, 대댓글 작성, 댓글 수정, 댓글 삭제, 댓글 조회(댓글 대댓글 포함)
 * 기타 : 빠른 개발을 위해 로컬 환경에서 개발 및 테스트 진행 
 
+<img width="985" alt="blog-app-flow" src="https://github.com/Rhw38555/msa-blog-service/assets/32809047/6e948a23-5578-4e60-baab-d5ed5db436f0">
+
+
 ### 핵심 기능 설명(핵심 기술)
 * config-server : spring cloud config는 분산 시스템 설정 정보를 중앙 집중화 하여 관리하기 위한 서비스, 모듈 : spring-boot, spring-cloud-config, spring-cloud-bus-amqp
 * rabbit-mq-service : spring cloud bus Spring Config 이벤트를 감지하여 변경된 설정 정보를 다른서비스에 전달, RabbitMQ를 사용하여 Cloud Bus는 구성 변경 이벤트를 메시지로 발행한다. 모듈 : rabbit-mq
