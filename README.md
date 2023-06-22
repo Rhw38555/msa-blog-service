@@ -57,8 +57,8 @@ git clone https://github.com/Rhw38555/msa-blog-service.git
 * 개발 툴 : IntelliJ IDEA 2022.2.3 
 
 ### 기타 
-* TODO 1 : Mongodb, Es 동기화 서비스 구축 
-* TODO 2 : mongodb search 최적화(대용량 성능 개선)
+* TODO 1 : mongodb search query 최적화(대용량 조회 성능 개선)
+* TODO 2 : Mongodb, Es 동기화 서비스 구축 
 * TODO 3 : 댓글 알림 기능 추가 
 * TODO 4 : 소셜 로그인 기능 추가 
 * TODO 5 : 게시물 작성 시 SAGA 패턴 도입하여 일관성 롤백 과정 도입 
