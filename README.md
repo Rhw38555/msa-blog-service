@@ -56,9 +56,10 @@ git clone https://github.com/Rhw38555/msa-blog-service.git
 * 테스트 코드 : Kotest Mockk 기반 테스트 코드 작성 
 * 개발 툴 : IntelliJ IDEA 2022.2.3 
 
-### 기타 
+### 기타
 * TODO 1 : mongodb search query 최적화(대용량 조회 성능 개선)
 * TODO 2 : Mongodb, Es 동기화 서비스 구축 
 * TODO 3 : 댓글 알림 기능 추가 
 * TODO 4 : 소셜 로그인 기능 추가 
 * TODO 5 : 게시물 작성 시 SAGA 패턴 도입하여 일관성 롤백 과정 도입 
+장애 대응과 성능 이점을 위한 CQRS 아키텍처 적용(조회 시스템 명령시스템 분리)
